@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Provider } from "react-redux";
+import GuardedRoute from "./hoc/GuardedRoute";
+import store from "./data/store";
+import { generateRoutes } from "./directory";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const directory = generateRoutes();
+
+    const routes = directory.map((route) => (
+        <GuardedRoute
+            key={route.path}
+            validator={route.validator}
+            path={route.path}
+            notAuthorizedRedirection={route.defaultUrl}
+            component={route.view}
+        ></GuardedRoute>
+    ));
+
+    return (
+        <Provider store={store}>
+            <Router>
+                <Switch>{routes}</Switch>
+            </Router>
+        </Provider>
+    );
 }
 
 export default App;
