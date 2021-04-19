@@ -1,5 +1,8 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
+import weatherReducer from "../reducer/weather/weatherReducer";
 
-const todoApp = combineReducers({})
+const todoApp = combineReducers({
+    weather: weatherReducer,
+});
 
-export default todoApp
+export default todoApp;

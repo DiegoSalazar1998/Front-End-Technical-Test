@@ -1,40 +1,24 @@
-import {
-    FETCH_WEATHER
-} from "./actionTypes";
+import clienteAxios from "../../../config/axios";
+import sign from './signs'
 
-import clienteAxios from '../config/axios.js'
-import Swal from 'sweetalert2';
-
-
-//Fetch Weather
-export function fetchWeatherAction(country, city){
-    return async (dispatch) => {
-        dispatch(agregarProducto());
-
-        try{
-            //insertar en la API
-            await clienteAxios.post('/productos',producto);
-
-            //Si todo bien
-            dispatch( agregarProductoExito(producto) );
-
-            //Alerta Exito
-            Swal.fire(
-                'Correcto',
-                'El producto se agregó correctamente',
-                'success'
-            )
-        }catch(error){
+function getWeather(body) {
+    return async (dispatch) => {     
+        //dispatch(descargarProductos());
+        const appId = "9bc1666bcf0bfac477468efbd31442a0";
+        try {
+            const response = await clienteAxios.get(
+                `?q=${body}&appid=${appId}`
+            );
+            dispatch(sign.getWeatherSuccesfully(response.data));
+        } catch (error) {
             console.log(error);
-            //Si hay un error cambiar el state
-            dispatch( agregarProductoError(true) )
-
-            //Alerta Error
-            Swal.fire({
-                icon:'error',
-                title: 'Hubo un error',
-                text: 'Hubo un error, intenta de nuevo'
-            })
+            //dispatch(descargaProductosError())
         }
-    }
+    };
 }
+
+const calls = {
+    getWeather: getWeather
+}
+
+export default calls;

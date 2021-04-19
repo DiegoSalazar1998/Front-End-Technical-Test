@@ -3,16 +3,12 @@ import Home from './container/home/home'
 //import SandboxDiego from './container/sandbox/sandboxDiego'
 
 import {
-    isAuthenticated,
-    isNormalUser,
-    isVendorUser,
     validationNotNeeded
 } from './guard'
 
 export const path = {
     home : '/home',
     default : '/', 
-    //sandoboxDiego : '/sandbox-diego',
 }
 
 const newRoute = (path,defaultUrl, view, validator) => {
