@@ -12,6 +12,9 @@ const Location = ({ location }) => {
     const getLocationToEdit = () =>
         dispatch(actions.location.calls.getLocationToEdit(location));
 
+    const removeLocation = (idLocation) =>
+        dispatch(actions.location.calls.removeLocation(idLocation));
+
     const kelvin = 273.15;
     return (
         <div className="Location">
@@ -28,7 +31,9 @@ const Location = ({ location }) => {
                 <p>{location.date + " " + location.time}</p>
             </div>
             <div className="buttonsContainer">
-                <button onClick={() => {}}>Delete</button>
+                <button onClick={() => {
+                    removeLocation(location.id)
+                }}>Delete</button>
                 <button
                     onClick={() => {
                         getWeather(location.location);

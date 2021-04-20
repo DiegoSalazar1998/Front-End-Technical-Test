@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   padding: 1.4rem;
-  background: #fff;
+  background: #007EA7;
   justify-content: right;
   border-radius: 10px;
   width: 100%;
@@ -20,7 +20,7 @@
 }
 
 .Location h1 {
-  color: #222;
+  color: white;
   text-transform: capitalize;
   font-weight: 700;
   font-size: 1.7rem;
@@ -28,7 +28,7 @@
 
 .Location p {
   padding-right: 1rem;
-  color: #444;
+  color: #CCDBDC;
 }
 
 .Location button {
@@ -49,4 +49,5 @@
 .buttonsContainer{
   display: flex;
   align-items: center;
+  justify-content: right;
 }

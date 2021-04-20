@@ -25,7 +25,7 @@ const Home = (props) => {
     return (
         <div>
             <Grid container spacing={1}>
-                <Grid item xs={12} sm={5}>
+                <Grid item xs={12} sm={7}>
                     <FormWeather
                         fetchWeather={getWeather}
                         addLocation={addLocation}
@@ -41,7 +41,7 @@ const Home = (props) => {
                         ""
                     )}
                 </Grid>
-                <Grid item xs={12} sm={7}>
+                <Grid item xs={12} sm={5}>
                     <FavoriteLocations />
                 </Grid>
             </Grid>

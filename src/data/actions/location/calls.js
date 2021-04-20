@@ -33,10 +33,23 @@ function editLocation(locationEdited) {
     };
 }
 
+function removeLocation(idLocation) {
+    return (dispatch) => {
+        dispatch(sign.removeLocation());
+        try {
+            dispatch(sign.removeLocationSuccesfully(idLocation));
+        } catch (error) {
+            console.log(error);
+            dispatch(sign.removeLocationError(true));
+        }
+    };
+}
+
 const calls = {
     addLocation: addLocation,
     getLocationToEdit: getLocationToEdit,
     editLocation: editLocation,
+    removeLocation: removeLocation,
 };
 
 export default calls;

@@ -40,6 +40,23 @@ const getLocationEdit = (locationToEdit) => ({
     payload: locationToEdit,
 });
 
+const removeLocation = () => ({
+    type: actionType.REMOVE_LOCATION,
+    payload: true,
+});
+
+//Si el producto se guarda en la base de datos
+const removeLocationSuccesfully = (idLocation) => ({
+    type: actionType.REMOVE_LOCATION_SUCCESFULLY,
+    payload: idLocation,
+});
+
+//Si hubo un error
+const removeLocationError = (status) => ({
+    type: actionType.REMOVE_LOCATION_ERROR,
+    payload: status,
+});
+
 const signs = {
     addingLocation: addingLocation,
     addLocationSuccesfully: addLocationSuccesfully,
@@ -48,6 +65,9 @@ const signs = {
     editLocationSuccesfully: editLocationSuccesfully,
     editLocationError: editLocationError,
     getLocationEdit: getLocationEdit,
+    removeLocation: removeLocation,
+    removeLocationSuccesfully: removeLocationSuccesfully,
+    removeLocationError: removeLocationError,
 };
 
 export default signs;

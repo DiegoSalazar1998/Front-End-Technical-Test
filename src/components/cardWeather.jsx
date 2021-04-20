@@ -15,9 +15,14 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        borderRadius: 10,
+        backgroundColor:'#80CED7',
+        color: 'white'
     },
     root: {
         minWidth: 275,
+        marginTop: 10,
+        backgroundColor:'#80CED7'
     },
     bullet: {
         display: "inline-block",
@@ -28,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 24,
     },
     pos: {
+        display: "flex",
         marginBottom: 20,
     },
 }));
@@ -50,17 +56,16 @@ const CardWeather = ({ weather, clearWeather }) => {
                 </div>
             )}
             {!weatherLoading ? (
-                <Container component="main" maxWidth="xs">
+                <Container component="main">
                     <Card className={classes.root} variant="outlined">
                         <CardContent className={classes.paper}>
                             <Typography
                                 className={classes.title}
-                                color="textSecondary"
                                 gutterBottom
                             >
                                 {weather.name}
                             </Typography>
-                            <Typography variant="h1" component="h2">
+                            <Typography variant="h2" component="h3">
                                 {parseFloat(
                                     weather.main.temp - kelvin,
                                     10
@@ -69,7 +74,6 @@ const CardWeather = ({ weather, clearWeather }) => {
                             </Typography>
                             <Typography
                                 className={classes.pos}
-                                color="textSecondary"
                             >
                                 {parseFloat(
                                     weather.main.temp_min - kelvin,

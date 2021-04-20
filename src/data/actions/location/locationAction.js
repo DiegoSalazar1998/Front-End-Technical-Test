@@ -15,28 +15,35 @@ function addLocationAction(state, response) {
             errorMessage: "Hubo un error",
         };
     } else {
+        console.log("RESPONSE", response.id);
         const locationsArray = state.locations;
         let isExisting = false;
-        locationsArray.map((loc)=>{
-            if(loc.id === response.id){
+        locationsArray.map((loc) => {
+            if (loc.id === response.id) {
                 isExisting = true;
             }
             return isExisting;
-        })
-        
-        if(!isExisting){
+        });
+
+        console.log("ISEXIST", isExisting);
+        if (!isExisting) {
             let newWeather = response;
 
+            Swal.fire(
+                "Added",
+                "Location added to favorite succesfully",
+                "success"
+            );
             return {
                 ...state,
                 locations: [...state.locations, newWeather],
-                weatherLoading: false,
+                locationLoading: false,
             };
-        }else{
-            Swal.fire("Notice", "Location al ready added to favorites", "info");
+        } else {
+            Swal.fire("Notice", "Location already added to favorites", "info");
             return {
                 ...state,
-                weatherLoading: false,
+                locationLoading: false,
             };
         }
     }
@@ -46,7 +53,7 @@ function addLocationAction(state, response) {
 function addingLocationAction(state, response) {
     return {
         ...state,
-        weatherLoading: true,
+        locationLoading: true,
     };
 }
 
@@ -61,11 +68,9 @@ function getLocationAction(state, response) {
             isEditing: false,
         };
     } else {
-    
         return {
             ...state,
             locationToEdit: response,
-            weatherLoading: false,
             isEditing: true,
         };
     }
@@ -91,7 +96,31 @@ function editLocationAction(state, response) {
             ...state,
             locationToEdit: {},
             locations: locationArray,
-            weatherLoading: false,
+            isEditing: false,
+        };
+    }
+}
+
+function removeLocationAction(state, response) {
+    if (response === null || response === undefined) {
+        return {
+            ...state,
+            locationToEdit: {},
+            locationLoading: false,
+            error: true,
+            errorMessage: "Hubo un error",
+            isEditing: false,
+        };
+    } else {
+        //Logic to remove location
+        let locationArray = state.locations;
+        const index = locationArray.findIndex((el) => el.id === response);
+        locationArray.splice(index, 1);
+
+        return {
+            ...state,
+            locationToEdit: {},
+            locations: locationArray,
             isEditing: false,
         };
     }
@@ -105,6 +134,7 @@ const actionsLocation = {
         addingLocationAction: addingLocationAction,
         getLocationAction: getLocationAction,
         editLocationAction: editLocationAction,
+        removeLocationAction: removeLocationAction,
     },
     calls: calls,
 };

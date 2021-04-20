@@ -23,6 +23,9 @@ function LocationReducer(state = initialState, action) {
             return location.action.getLocationAction(state, action.payload);
         case location.actionType.EDIT_LOCATION_SUCCESFULLY:
             return location.action.editLocationAction(state, action.payload);
+        // --- CASE DELETE LOCATION ---
+        case location.actionType.REMOVE_LOCATION_SUCCESFULLY:
+            return location.action.removeLocationAction(state, action.payload);
         default:
             return { ...state };
     }
