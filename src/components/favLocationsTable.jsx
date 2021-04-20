@@ -356,15 +356,31 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Location from "../components/location";
+import Typography from "@material-ui/core/Typography";
+import Image from "material-ui-image";
 
 const FavLocationsTable = (props) => {
     const locations = useSelector((state) => state.location.locations);
 
     return (
         <div>
-            {locations.map((location) => (
-                <Location key={location.id} location={location}/>
-            ))}
+            {locations.length === 0 ? (
+                <div style={{ margin: 50, alignItems: "center" }}>
+                    <Typography component="h1" variant="h5">
+                        Favorites locations not founded
+                    </Typography>
+                    <div style={{width:'60%',height:'60%', alignItems:'center',justifyContent:'center',margin:'auto'}}>
+                        <Image
+                            src="https://www.flaticon.com/svg/vstatic/svg/985/985284.svg?token=exp=1618962267~hmac=ccc4cfb368d500efd9a9a00e6fbd171e"
+                            cover={true}
+                        />
+                    </div>
+                </div>
+            ) : (
+                locations.map((location) => (
+                    <Location key={location.id} location={location} />
+                ))
+            )}
         </div>
     );
 };

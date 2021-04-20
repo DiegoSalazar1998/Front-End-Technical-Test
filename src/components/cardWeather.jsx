@@ -70,7 +70,7 @@ const CardWeather = ({ weather, clearWeather }) => {
                                     weather.main.temp - kelvin,
                                     10
                                 ).toFixed(2)}
-                                <span> &#x2103;</span>
+                                <span style={{fontFamily:'inherit'}}> &#x2103;</span>
                             </Typography>
                             <Typography
                                 className={classes.pos}
