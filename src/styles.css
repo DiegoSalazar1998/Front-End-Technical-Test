@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.Location {
+  display: flex;
+  align-items: center;
+  padding: 1.4rem;
+  background: #fff;
+  justify-content: right;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.Location:not(:last-child) {
+  border-bottom: 2px solid #f5f6f7;
+}
+
+.Location h1 {
+  color: #222;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.Location p {
+  padding-right: 1rem;
+  color: #444;
+}
+
+.Location button {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #d34b4b;
+  background: #d34b4b;
+  margin: 5px;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+}
+
+.Location button:hover {
+  background: #e06a6a;
+}
+
+.buttonsContainer{
+  display: flex;
+  align-items: center;
+}

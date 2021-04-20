@@ -1,7 +1,6 @@
 import actionType from "./actionTypes";
 
 function gettingWeather() {
-    console.log("LOADING");
     const action = {
         type: actionType.FETCHING_WEATHER,
         payload: true,
