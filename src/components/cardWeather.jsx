@@ -6,6 +6,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import { useSelector } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -30,54 +32,81 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const CardWeather = ({ weather }) => {
+const CardWeather = ({ weather, clearWeather }) => {
     const classes = useStyles();
-    console.log("WEATHER", weather);
+
+    const weatherLoading = useSelector((state) => state.weather.weatherLoading);
 
     //Conversion de grados kelvin
     const kelvin = 273.15;
 
     return (
-        <Container component="main" maxWidth="xs">
-            <Card className={classes.root} variant="outlined">
-                <CardContent className={classes.paper}>
-                    <Typography
-                        className={classes.title}
-                        color="textSecondary"
-                        gutterBottom
-                    >
-                        {weather.name}
-                    </Typography>
-                    <Typography variant="h1" component="h2">
-                        {parseFloat(weather.main.temp - kelvin, 10).toFixed(2)}
-                        <span> &#x2103;</span>
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        {parseFloat(weather.main.temp_min - kelvin, 10).toFixed(
-                            2
-                        )}
-                        <span> &#x2103;</span> / 
-                        {parseFloat(weather.main.temp_max - kelvin, 10).toFixed(
-                            2
-                        )}
-                        <span> &#x2103;</span>
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        Humidity: {weather.main.humidity}
-                        <br />
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        Wind: {weather.wind.speed}mph
-                        <br />
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button fullWidth variant="contained" color="primary">
-                        Clear
-                    </Button>
-                </CardActions>
-            </Card>
-        </Container>
+        <div>
+            {!weatherLoading ? null : (
+                <div className={classes.root}>
+                    <CardContent className={classes.paper}>
+                        <CircularProgress color="secondary" />
+                    </CardContent>
+                </div>
+            )}
+            {!weatherLoading ? (
+                <Container component="main" maxWidth="xs">
+                    <Card className={classes.root} variant="outlined">
+                        <CardContent className={classes.paper}>
+                            <Typography
+                                className={classes.title}
+                                color="textSecondary"
+                                gutterBottom
+                            >
+                                {weather.name}
+                            </Typography>
+                            <Typography variant="h1" component="h2">
+                                {parseFloat(
+                                    weather.main.temp - kelvin,
+                                    10
+                                ).toFixed(2)}
+                                <span> &#x2103;</span>
+                            </Typography>
+                            <Typography
+                                className={classes.pos}
+                                color="textSecondary"
+                            >
+                                {parseFloat(
+                                    weather.main.temp_min - kelvin,
+                                    10
+                                ).toFixed(2)}
+                                <span> &#x2103;</span> /
+                                {parseFloat(
+                                    weather.main.temp_max - kelvin,
+                                    10
+                                ).toFixed(2)}
+                                <span> &#x2103;</span>
+                            </Typography>
+                            <Typography variant="body2" component="p">
+                                Humidity: {weather.main.humidity}
+                                <br />
+                            </Typography>
+                            <Typography variant="body2" component="p">
+                                Wind: {weather.wind.speed}mph
+                                <br />
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                onClick={() => {
+                                    clearWeather();
+                                }}
+                            >
+                                Clear
+                            </Button>
+                        </CardActions>
+                    </Card>
+                </Container>
+            ) : null}
+        </div>
     );
 };
 
