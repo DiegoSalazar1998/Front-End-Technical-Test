@@ -16,13 +16,13 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
         alignItems: "center",
         borderRadius: 10,
-        backgroundColor:'#80CED7',
-        color: 'white'
+        backgroundColor: "#80CED7",
+        color: "white",
     },
     root: {
         minWidth: 275,
         marginTop: 10,
-        backgroundColor:'#80CED7'
+        backgroundColor: "#80CED7",
     },
     bullet: {
         display: "inline-block",
@@ -40,6 +40,8 @@ const useStyles = makeStyles((theme) => ({
 
 const CardWeather = ({ weather, clearWeather }) => {
     const classes = useStyles();
+
+    const isEditing = useSelector((state) => state.location.isEditing);
 
     const weatherLoading = useSelector((state) => state.weather.weatherLoading);
 
@@ -59,10 +61,7 @@ const CardWeather = ({ weather, clearWeather }) => {
                 <Container component="main">
                     <Card className={classes.root} variant="outlined">
                         <CardContent className={classes.paper}>
-                            <Typography
-                                className={classes.title}
-                                gutterBottom
-                            >
+                            <Typography className={classes.title} gutterBottom>
                                 {weather.name}
                             </Typography>
                             <Typography variant="h2" component="h3">
@@ -70,11 +69,12 @@ const CardWeather = ({ weather, clearWeather }) => {
                                     weather.main.temp - kelvin,
                                     10
                                 ).toFixed(2)}
-                                <span style={{fontFamily:'inherit'}}> &#x2103;</span>
+                                <span style={{ fontFamily: "inherit" }}>
+                                    {" "}
+                                    &#x2103;
+                                </span>
                             </Typography>
-                            <Typography
-                                className={classes.pos}
-                            >
+                            <Typography className={classes.pos}>
                                 {parseFloat(
                                     weather.main.temp_min - kelvin,
                                     10
@@ -103,6 +103,7 @@ const CardWeather = ({ weather, clearWeather }) => {
                                 onClick={() => {
                                     clearWeather();
                                 }}
+                                disabled={isEditing}
                             >
                                 Clear
                             </Button>

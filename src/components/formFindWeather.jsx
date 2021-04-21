@@ -103,12 +103,6 @@ const FormFindWeather = (props) => {
             };
             if (weather.name !== undefined && weather.name !== null) {
                 props.addLocation(myLocation);
-                // Swal.fire(
-                //     "Added",
-                //     "Location added to favorite succesfully",
-                //     "success"
-                // );
-                //Clear the card and the input
                 props.clearWeather();
                 setLocation("");
             } else {
@@ -181,7 +175,7 @@ const FormFindWeather = (props) => {
                         variant="contained"
                         color="primary"
                         onClick={findWeatherHandle}
-                        disabled={isEditing ? true : false}
+                        disabled={isEditing}
                     >
                         Find
                     </Button>
