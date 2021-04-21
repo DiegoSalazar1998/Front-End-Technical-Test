@@ -15,32 +15,42 @@ function addLocationAction(state, response) {
             errorMessage: "Hubo un error",
         };
     } else {
-        console.log("RESPONSE", response.id);
-        const locationsArray = state.locations;
-        let isExisting = false;
-        locationsArray.map((loc) => {
-            if (loc.id === response.id) {
-                isExisting = true;
+        if (state.locations.length < 3) {
+            const locationsArray = state.locations;
+            let isExisting = false;
+            locationsArray.map((loc) => {
+                if (loc.id === response.id) {
+                    isExisting = true;
+                }
+                return isExisting;
+            });
+
+            if (!isExisting) {
+                let newWeather = response;
+
+                Swal.fire(
+                    "Added",
+                    "Location added to favorite succesfully",
+                    "success"
+                );
+                return {
+                    ...state,
+                    locations: [...state.locations, newWeather],
+                    locationLoading: false,
+                };
+            } else {
+                Swal.fire(
+                    "Notice",
+                    "Location already added to favorites",
+                    "info"
+                );
+                return {
+                    ...state,
+                    locationLoading: false,
+                };
             }
-            return isExisting;
-        });
-
-        console.log("ISEXIST", isExisting);
-        if (!isExisting) {
-            let newWeather = response;
-
-            Swal.fire(
-                "Added",
-                "Location added to favorite succesfully",
-                "success"
-            );
-            return {
-                ...state,
-                locations: [...state.locations, newWeather],
-                locationLoading: false,
-            };
-        } else {
-            Swal.fire("Notice", "Location already added to favorites", "info");
+        } else if ((state.locations.length >= 3)) {
+            Swal.fire("Notice", "You can't add more favorites locations!", "info");
             return {
                 ...state,
                 locationLoading: false,
