@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import actions from "../../data/actions/index";
+import actions from "../../data/actions/index.ts";
 import FormWeather from "../../components/formFindWeather";
 import CardWeather from "../../components/cardWeather";
 import FavoriteLocations from "../favoriteLocations/favoriteLocations";

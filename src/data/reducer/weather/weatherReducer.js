@@ -1,4 +1,4 @@
-import actions from "../../actions";
+import actions from "../../actions/index.ts";
 
 const weather = actions.weather;
 
