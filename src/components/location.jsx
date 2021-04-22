@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles.css";
-import actions from "../data/actions/index";
+import actions from "../data/actions/index.ts";
 import { useDispatch } from "react-redux";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
